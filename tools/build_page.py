@@ -1,0 +1,53 @@
+import sys, markdown
+src, out = sys.argv[1], sys.argv[2]
+md = open(src, encoding="utf-8").read()
+md = md.split("\n", 1)[1]  # the logo + "Privacy Policy" header replace the markdown title
+body = markdown.markdown(md)
+
+page = """<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy | Project Light Gun</title>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<style>
+@font-face{font-family:"Tektur";src:url(../assets/tektur.woff) format("woff");font-weight:400 900;font-display:swap}
+:root{--bg:#0e0e0f;--card:#1a1a1d;--line:#2c2c31;--text:#e6e6e8;--muted:#a3a3ab;--orange:#ff7517;--orange2:#ff893b}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;min-height:100vh;color:var(--text);font-family:"Tektur",system-ui,sans-serif;font-size:17px;line-height:1.65;
+  background:radial-gradient(ellipse at top right,#262628 0%,var(--bg) 55%) fixed}
+.wrap{max-width:46rem;margin:0 auto;padding:2.5rem 16px 3rem}
+header{text-align:center;margin-bottom:2rem}
+header img{width:min(340px,80%);height:auto}
+header h1{margin:1rem 0 .2rem;font-size:2rem;font-weight:600;letter-spacing:.04em;color:var(--orange)}
+main{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.8rem}
+main>p:first-child{margin-top:0;color:var(--muted);font-size:.9rem}
+h2{color:var(--orange2);font-size:1.2rem;font-weight:600;margin:2rem 0 .4rem;padding-top:1.2rem;border-top:1px solid var(--line)}
+p,li{color:var(--text)}
+strong{color:#fff;font-weight:700}
+ul{padding-left:1.2rem}
+li{margin:.35rem 0}
+li::marker{color:var(--orange)}
+a{color:var(--orange2)}
+a:hover{color:#fff}
+footer{text-align:center;color:var(--muted);font-size:.85rem;margin-top:1.6rem}
+@media (max-width:520px){main{padding:1.2rem 1.1rem}body{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<img src="../assets/logo.png" alt="Project Light Gun">
+<h1>Privacy Policy</h1>
+</header>
+<main>
+""" + body + """
+</main>
+<footer>&copy; 2026 GameOnScorpio &middot; Project Light Gun</footer>
+</div>
+</body>
+</html>
+"""
+open(out, "w", encoding="utf-8", newline="\n").write(page)
